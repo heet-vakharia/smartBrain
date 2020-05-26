@@ -1,0 +1,8 @@
+.Logo{
+    border: 1rem solid #3498db !important;
+    padding:1rem;
+}
+.Tilt{
+    display: flex;
+    align-items: center;
+}
