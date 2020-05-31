@@ -76,7 +76,7 @@ import Particles from 'react-particles-js';
 
     onBtnClick = () =>{
       this.setState({imgUrl: this.state.input});
-      fetch('http://localhost:3000/image', {
+      fetch('https://nameless-temple-70603.herokuapp.com/image', {
         method : 'post',
         headers:{'Content-Type' : 'application/json'},
         body: JSON.stringify({
@@ -87,7 +87,7 @@ import Particles from 'react-particles-js';
         if(response){
           
           this.displayBox(this.calculateFaceLcation(response));
-          fetch('http://localhost:3000/image',{
+          fetch('https://nameless-temple-70603.herokuapp.com/image',{
             method : 'put',
             headers:{'Content-Type' : 'application/json'},
             body: JSON.stringify({
