@@ -3,8 +3,7 @@ class Register extends Component {
     constructor(props){
         super(props)
          this.state={
-            isFilled : true,
-            toggleClassName : 'dn red  hover-dark-red b',
+           err:'',
              email: '',
              password:'',
              name:''
@@ -19,11 +18,7 @@ class Register extends Component {
     onRegisterPassword= (event) =>{
      this.setState({password : event.target.value});
   }
-  toggleErrMsg=() => {
-    var css = (this.state.isFilled === true) ?  " dn red  hover-dark-red b" : "db red  hover-dark-red b";
-    this.setState({toggleClassName: css});
  
-  }
      onRegister = () => {
          fetch('https://calm-wildwood-26382.herokuapp.com/register',{
              method : 'Post',
@@ -41,8 +36,7 @@ class Register extends Component {
                     this.setState({isFilled : true})
                    }
                    else{
-                       this.setState({isFilled:false})
-                       this.toggleErrMsg()
+                      this.setState({err:user})
                    }
                })
  }
@@ -66,7 +60,7 @@ class Register extends Component {
                         <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                         <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" onChange= {this.onRegisterPassword} type="password" name="password"  id="password"/>
                     </div>
-                    <p className= {this.state.toggleClassName} >**Information insufficent</p>
+        <p className='db red  hover-dark-red b' >{this.state.err}</p>
                 </fieldset>
                 
                     <div className ="">

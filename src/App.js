@@ -7,6 +7,8 @@ import FaceRecognition from './Components/Facerecognition/FaceRecognition'
 import SignIn from './Components/SignIn/SignIn'
 import Register from './Components/Register/Register'
 
+
+
 import './App.css';
 import Particles from 'react-particles-js';
 
@@ -138,7 +140,8 @@ import Particles from 'react-particles-js';
                                 :(
                                   this.state.route === 'signin'?<SignIn  routeChange ={this.routeChange} loadUser = {this.loadUser} toggleErrMsg = {this.toggleErrMsg} />:<Register routeChange ={this.routeChange} loadUser={this.loadUser} />  
                                 )
-                  }
+                  } 
+                       
                             </div>
                     )
                   
@@ -154,3 +157,5 @@ import Particles from 'react-particles-js';
 
 
     // "start": "serve -s build",
+
+    // "start": "react-scripts start",

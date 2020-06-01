@@ -3,8 +3,7 @@ class SignIn extends Component {
    constructor(props){
        super(props)
         this.state={
-            isCorrect : true,
-            toggleClassName : 'dn red  hover-dark-red b',
+           err : '',
             email: '',
             password:''
         }
@@ -16,11 +15,7 @@ class SignIn extends Component {
     this.setState({password : event.target.value});
  }
  
- toggleErrMsg=() => {
-   var css = (this.state.isCorrect === true) ?  " dn red  hover-dark-red b" : "db red  hover-dark-red b";
-   this.setState({toggleClassName: css});
-
- }
+ 
     onSignIn = () => {
         fetch('https://calm-wildwood-26382.herokuapp.com/signin',{
             method : 'Post',
@@ -38,8 +33,7 @@ class SignIn extends Component {
                     this.setState({isCorrect : true});
                     }
                     else{
-                        this.setState({isCorrect : false});
-                        this.toggleErrMsg()
+                        this.setState({err : user })   
                     }
                 })
     
@@ -66,7 +60,7 @@ class SignIn extends Component {
                      type="password" name="password"  id="password"/>
                     
                 </div>
-                <p className= {this.state.toggleClassName} >**Incorrect Username/Password</p>
+       <p className= 'db red  hover-dark-red b'>{this.state.err}</p>
             </fieldset>
             
                 <div className ="">
