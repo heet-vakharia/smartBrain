@@ -26,7 +26,7 @@ import Particles from 'react-particles-js';
     const initialState = {
       input :'',
       imgUrl:'',
-      box : {},
+      box : [],
       route : 'signin',
       IsSignin : false,
       user:{
@@ -45,16 +45,27 @@ import Particles from 'react-particles-js';
       }
 
       calculateFaceLcation = (data) =>{
-        const clarifaiFace =  data.outputs[0].data.regions[0].region_info.bounding_box;
+        const clarifaiFace =  data.outputs[0].data.regions;
+        if(clarifaiFace === undefined){
+          return [];
+        }
         const img = document.getElementById('faceImg');
         const width= Number(img.width);
         const height = Number(img.height);
-        return {
-          leftCol : clarifaiFace.left_col * width,
-          topRow : clarifaiFace.top_row * height,
-          rightCol : width - (clarifaiFace.right_col * width),
-          bottomRow : height - (clarifaiFace.bottom_row * height)
-         }
+
+
+        const faceLocation = clarifaiFace.map(region => {
+          const box = region.region_info.bounding_box;
+              return {
+                // calculate distance to borders of the image
+                top: box.top_row * height,
+                left: box.left_col * width,
+                bottom: height - (box.bottom_row * height),
+                right: width - (box.right_col * width)
+              };
+
+        })
+        return faceLocation;
       }
 
       loadUser = (data) => {
@@ -137,3 +148,9 @@ import Particles from 'react-particles-js';
     }
 
     export default App;
+
+
+
+
+
+    // "start": "serve -s build",
